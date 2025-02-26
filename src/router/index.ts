@@ -3,7 +3,9 @@ import GuestLayout from '../views/layouts/GuestLayout.vue';
 import LoginView from '../views/auth/LoginView.vue';
 import AppLayout from '../views/layouts/AppLayout.vue';
 import CreateDriver from '../views/Driver/CreateDriver.vue';
-import HomeView from '../views/HomeView.vue';
+import CreateRace from '../views/Race/CreateRace.vue';
+import CreateLap from '../views/Race/CreateLap.vue';
+import Home from '../views/Home.vue';
 
 const routes = [
     {
@@ -24,12 +26,22 @@ const routes = [
             {
                 path: '',
                 name: 'Home',
-                component: HomeView,
+                component: Home,
+            },
+            {
+                path: 'laps/create',
+                name: 'CreateLap',
+                component: CreateLap,
             },
             {
                 path: 'drivers/create',
                 name: 'CreateDriver',
                 component: CreateDriver,
+            },
+            {
+                path: 'races/create',
+                name: 'CreateRace',
+                component: CreateRace,
             }
         ]
     }
