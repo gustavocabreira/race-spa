@@ -3,6 +3,7 @@ import GuestLayout from '../views/layouts/GuestLayout.vue';
 import LoginView from '../views/auth/LoginView.vue';
 import AppLayout from '../views/layouts/AppLayout.vue';
 import CreateDriver from '../views/Driver/CreateDriver.vue';
+import HomeView from '../views/HomeView.vue';
 
 const routes = [
     {
@@ -20,6 +21,11 @@ const routes = [
         path: '',
         component: AppLayout,
         children: [
+            {
+                path: '',
+                name: 'Home',
+                component: HomeView,
+            },
             {
                 path: 'drivers/create',
                 name: 'CreateDriver',

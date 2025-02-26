@@ -5,9 +5,17 @@
 </template>
 
 <script lang="ts">
+import client from '../../helpers/client';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'AppLayout',
+    mounted() {
+			client.get('me')
+				.catch(err => {
+					alert('Unauthorized');
+					this.$router.push({name: "LoginPage"})
+			})
+    }
 })
 </script>

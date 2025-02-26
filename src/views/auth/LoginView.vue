@@ -25,7 +25,7 @@
 
       <!-- Form -->
       <div class="mt-6">
-        <form class="flex flex-col gap-2">
+        <form @submit.prevent="login" class="flex flex-col gap-2">
           <Input
             label="Email"
             type="email"
@@ -33,6 +33,7 @@
             id="email"
             placeholder="you@example.com"
             required
+            v-model="form.email"
           />
           <Input
             label="Senha"
@@ -41,6 +42,7 @@
             id="password"
             placeholder="••••••••"
             required
+            v-model="form.password"
           />
 
           <PrimaryButton 
@@ -61,6 +63,8 @@
 import { defineComponent } from 'vue';
 import Input from '../../components/ui/Input.vue';
 import PrimaryButton from '../../components/ui/PrimaryButton.vue';
+import client from '../../helpers/client';
+import axios from 'axios';
 
 
 export default defineComponent({
@@ -68,6 +72,35 @@ export default defineComponent({
     components: {
         Input,
         PrimaryButton,
+    },
+    data() {
+      return {
+        form: {
+          email: '',
+          password: '',
+        },
+        isLoading: false,
+      }
+    },
+    methods: {
+      login() {
+        this.isLoading = true;
+
+        console.log(client)
+
+        client.get('http://localhost/sanctum/csrf-cookie')
+          .then(() => {
+            client.post('auth/login', this.form)
+              .then((response) => {
+                this.$router.push({
+                 name: 'Home'
+                })
+              })
+              .catch(err => {
+                alert(err.response.data.message)
+              })
+        })
+      }
     }
 });
 </script>
